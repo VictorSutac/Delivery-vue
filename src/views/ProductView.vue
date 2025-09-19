@@ -2,19 +2,24 @@
   <section class="product">
     <div class="container">
       <div class="products-wrapper" id="goods-container">
-        <div class="products-card">
+        <div
+          class="products-card"
+          v-for="goods in goodsArray"
+          :key="goods.id"
+          :to="`/goods?id=${goods.id}`"
+        >
           <div class="products-card__image">
-            <img src="../assets/img/goods/goods-1.jpg" alt="goods-1" />
+            <img :src="getUrl(goods.image)" alt="goods-1" />
           </div>
           <div class="products-card__description">
             <div class="products-card__description-row">
               <h5 class="products-card__description--name">
-                Ролл угорь стандарт
+                {{ goods.name }}
               </h5>
             </div>
             <div class="products-card__description-row">
               <p class="products-card__description--text">
-                Рис, угорь, соус унаги, кунжут, водоросли нори.
+                {{ goods.text }}
               </p>
             </div>
             <div class="products-card__description-row">
@@ -27,13 +32,13 @@
                   />
                 </button>
                 <span class="products-card__description-controls--price">
-                  250 ₽
+                  {{ goods.price }} ₽
                 </span>
               </div>
             </div>
           </div>
         </div>
-        <div class="products-card">
+        <!-- <div class="products-card">
           <div class="products-card__image">
             <img src="../assets/img/goods/goods-2.jpg" alt="goods-2" />
           </div>
@@ -185,67 +190,15 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
-const restArray = [
-  {
-    id: 0,
-    title: "Пицца плюс",
-    time: 50,
-    rating: 4.5,
-    price: 900,
-    type: "Питтца",
-    image: "rest-1.jpg",
-  },
-  {
-    id: 1,
-    title: "Тануки",
-    time: 50,
-    rating: 4.5,
-    price: 900,
-    type: "Питтца",
-    image: "rest-2.jpg",
-  },
-  {
-    id: 2,
-    title: "FoodBand",
-    time: 50,
-    rating: 4.5,
-    price: 900,
-    type: "Питтца",
-    image: "rest-3.jpg",
-  },
-  {
-    id: 3,
-    title: "Жадины-пицца",
-    time: 50,
-    rating: 4.5,
-    price: 900,
-    type: "Питтца",
-    image: "rest-4.jpg",
-  },
-  {
-    id: 4,
-    title: "Точка еды",
-    time: 50,
-    rating: 4.5,
-    price: 900,
-    type: "Питтца",
-    image: "rest-5.jpg",
-  },
-  {
-    id: 5,
-    title: "PizzaBurger",
-    time: 50,
-    rating: 4.5,
-    price: 900,
-    type: "Питтца",
-    image: "rest-6.jpg",
-  },
-];
+import { goodsArray } from "../constants/goods";
+const getUrl = (name) => {
+  return new URL(`../assets/img/goods/${name}`, import.meta.url);
+};
 </script>
